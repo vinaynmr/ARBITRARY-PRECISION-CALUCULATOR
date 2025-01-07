@@ -102,3 +102,39 @@ int multiplication(dlist *temp1,dlist *temp2,dlist **head,dlist **tail)
 	*tail = t1;
 	return SUCCESS;
 }
+
+
+int shift_list(dlist **head3,dlist **tail3,dlist **head1,dlist **tail1)
+{
+	if(*head1 != NULL)
+		return FAILURE;
+	if(*head3 == NULL)
+		return LIST_EMPTY;
+	dlist *temp = *head3;
+	//shifting list to another list
+	while(temp != NULL)
+	{
+		//insert at last funtion call
+		int ret = insert_at_last(head1,tail1,temp -> val);
+		if(ret == FAILURE)
+			return FAILURE;
+		temp = temp -> next;
+	}
+	return SUCCESS;
+}
+
+int append_zeros(dlist **head,dlist **tail,int count)
+{
+	//check list is empty
+	if(*head != NULL)
+		return FAILURE;
+	//append zero count times 
+	while(count > 0)
+	{
+		int ret = insert_at_last(head,tail,0);
+		if(ret == FAILURE)
+			return FAILURE;
+		count--;
+	}
+	return SUCCESS;
+}
